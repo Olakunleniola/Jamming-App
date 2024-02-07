@@ -1,0 +1,323 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Lato:wght@900&family=Monoton&family=Nunito+Sans:wght@300;400;500;700&family=Oxygen+Mono&family=Oxygen:wght@300;400;700&family=Playpen+Sans:wght@400;500&family=Protest+Riot&family=Roboto+Mono:wght@400;500&family=Work+Sans:wght@100;200;300;400;500;700;900&display=swap');
+
+
+* {
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: "Work Sans", sans-serif;
+}
+
+body {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(https://img.freepik.com/premium-photo/digital-technology-background-with-purple-background-words-digital-screen_900775-15747.jpg?w=1060);
+    background-size: cover;
+    background-attachment:fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: #fff;
+}
+
+.login{
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    color: #eeeef3;
+    text-align: center;
+    padding: 10px;
+}
+
+.login h1 {
+    color: #fff;
+    font-size: 48px;
+    font-family: "Playpen Sans";
+}
+
+.login p {
+    font-size: 20px;
+    font-weight: 500;
+    font-family: "Roboto Mono";
+    padding: 5px;
+    line-height: 30px;
+}
+
+#login-but {
+    padding: 20px;
+    background:url(https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Spotify_App_Logo.svg/400px-Spotify_App_Logo.svg.png);
+    background-size: 30px;
+    background-repeat: no-repeat;
+    background-position:5px center;
+    background-color: rgba(0,0,0,0.8);
+    color: #fff;
+    border-radius: 10px;
+    font-size: 20px;
+    margin-top: 20px;
+    padding-left: 45px;
+    font-family: "Work Sans"
+}
+
+
+/* header Section */
+header h1 {
+    background-image: linear-gradient(30deg, #191971, #FF69B4);  
+    color: #DDA0DD	;
+    text-align: center;
+    font-family: "Monoton", sans-serif;
+    padding: 10px;
+    font-size: 38px;
+}
+
+header span {
+    color: #FF69B4;
+    font-family: "Monoton", sans-serif;
+}
+
+
+.jam {
+    color: #DDA0DD;
+    font-family: "Monoton" sans-serif;
+    text-transform: uppercase;
+}
+
+.min{
+    color:#FF69B4
+}
+
+
+/* Main Section */
+
+    /* Profile section  */
+#main-container {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    padding: 70px 30px;
+}
+
+.image-container {
+    width: 150px;
+    height: 150px;  
+    border: 5px solid #FF69B4 ;
+    border-radius: 50%;
+    object-fit: contain;
+}
+
+#profile-pics{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-position: 0px 0px;
+    object-fit: cover;
+}
+
+.greetings {
+    margin-top: 30px;
+    font-family: 'Oxygen', sans-serif;
+    letter-spacing: 6px;
+    color: #FF69B4;
+    font-size: 30px;
+    text-align: center;
+}
+
+.username {
+    color: #fff;
+    font-family: 'Protest Riot';
+}
+
+
+    /* Form Section */
+form {
+    display: flex;
+    flex-direction: column;
+    margin: 70px auto;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+}
+
+form button {
+    min-width: 30%;
+    max-width: 35%;
+    /* min-width: 50%; */
+    background-color: rgba(0,0,0,0.7);
+    color: #fff;
+    padding: 12px ;
+    text-align: center;
+    border-radius: 15px;
+    font-size: 15px;
+    margin-top: 30px;
+}
+
+form button:hover {
+    background-color: #FF69B4;
+    /* border: 2px solid #191971; */
+}
+
+form button:active {
+    background-color: rgba(0,0,0,0.7);
+    border-color: #FF69B4;
+}
+
+form input {
+    padding: 15px;
+    width: 60%;
+    text-align: center;
+    border-radius: 10px;
+    outline:none;
+    font-size: 15px;
+}
+
+form input:focus {
+    outline:2px solid #FF69B4
+}
+
+/* RESULT AND PLAYLIST SECTION */
+
+.container {
+    display: flex;
+    margin: 60px auto 40px;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.result-cont {
+    flex-basis: 50%;
+    color: #fff;
+}
+
+.playlist {
+    flex-basis: 45%;
+    color: #fff;
+}
+
+.result-cont , .playlist {
+    height: 600px;
+    border: 2px solid #191971;
+    background-color: rgba(25, 25, 113, 0.6);
+    padding: 5px;
+    box-shadow:-2px 1px 5px 2px #191971;
+    overflow-y:auto;
+}
+
+.result-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.res {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    border-bottom: 1px solid;
+    padding: 10px;
+    align-content: center;
+}
+
+.addbutton, .removebutton {
+    background: none;
+    border: none;
+    color: #fff;
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+.addbutton:hover, .removebutton:hover {
+    color: #FF69B4;
+}
+
+.artist {
+    font-weight: normal;
+    margin-top: 5px;
+}
+
+.playlistname {
+    background:none ;
+    padding: 10px;
+    outline: none;
+    border: none;
+    text-align: center;
+    width: 100%;
+    color: #fff;
+    font-size: 25px;
+    font-weight: 600;
+    border-bottom: 2px solid #fff;
+}
+
+.playlistname:focus {
+    border-bottom: 2px solid #FF69B4;
+}
+
+.saveplaylist {
+    padding: 10px;
+    display: block;
+    margin: 15px auto;
+    border-radius: 15px;
+    background-color: #FF69B4;
+    color: #fff;
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+.saveplaylist:hover {
+    background-color: rgba(0,0,0,0.7);
+    border: 1px solid #FF69B4;
+}
+
+.saveplaylist:active {
+    background-color: #FF69B4;
+}
+
+
+
+
+
+
+
+
+
+
+/* HANDLE OVERFLOW SCROLLBAR */
+::-webkit-scrollbar {
+    width: 5px; /* Set the width of the scrollbar */
+    /* height: 5px; Set the height of the scrollbar */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #FF69B4; /* Set the background color of the thumb */
+    border-radius: 5px; /* Add rounded corners to the thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #0056b3; /* Change the background color on hover */
+  }
+
+::-webkit-scrollbar-track {
+    background: #191971; /* Set the background color of the track */
+    border-radius: 5px; /* Add rounded corners to the track */
+}
+
+  
+::-webkit-scrollbar-thumb:active {
+    background: #0056b3; /* Change the background color when dragged */
+}
+
+::-webkit-scrollbar-button {
+    display: none; 
+    /* Hide the default scrollbar buttons (up and down) */
+
+}
+
+
+
+
+/* ::-webkit-scrollbar-corner {
+    background: #f0f0f0; /* Set the background color of the corner 
+} 
+    */
