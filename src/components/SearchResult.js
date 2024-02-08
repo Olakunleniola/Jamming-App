@@ -1,14 +1,21 @@
 import React from "react"
 
-export function SearchResult({songtitle, artist, updatePlaylist, id}) {
+export function SearchResult({trackData, addToPlaylist}) {
     return (
         <>
-            <ul className="result-list">
-                <li className="res">
-                    <h5 className="song">{songtitle}<div className="artist">{artist}</div></h5>
-                    <button className="addbutton" onClick={() => {updatePlaylist(id)}} >+</button>
-                </li>
-            </ul>
+            {
+                trackData.map((track,idx) =>  
+                    <ul className="result-list" key={idx}>
+                        <li className="res">
+                            <h5 className="song">{track.songtitle}
+                                <div className="artist">{track.artist}</div>
+                                <div className="album">{track.album}</div>
+                            </h5>
+                            <button className="addbutton" onClick={() => {addToPlaylist(track.id)}} >+</button>
+                        </li>
+                    </ul>
+                )
+            }
         </>
     )
 }
