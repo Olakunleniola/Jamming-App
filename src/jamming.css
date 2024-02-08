@@ -100,19 +100,20 @@ header span {
 }
 
 .image-container {
-    width: 150px;
-    height: 150px;  
+    width: 200px;
+    height: 200px;  
     border: 5px solid #FF69B4 ;
     border-radius: 50%;
     object-fit: contain;
+    display: flex;
+    align-items: center;
 }
 
 #profile-pics{
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    object-position: 0px 0px;
-    object-fit: cover;
+    object-fit: fit;
 }
 
 .greetings {
@@ -179,22 +180,31 @@ form input:focus {
 
 /* RESULT AND PLAYLIST SECTION */
 
+#msg, #loginError {
+    width: 100%;
+    padding: 20px;
+    color: #fff;
+    text-align: center;
+    display: none;
+}
+
 .container {
     display: flex;
-    margin: 60px auto 40px;
+    margin: 60px 0px 40px;
     justify-content: space-between;
     align-items: center;
+    min-width: 60%;
     flex-wrap: wrap;
+    color: #fff;
+
 }
 
 .result-cont {
-    flex-basis: 50%;
-    color: #fff;
+    width: 50%;
 }
 
 .playlist {
-    flex-basis: 45%;
-    color: #fff;
+    width: 45%;
 }
 
 .result-cont , .playlist {
@@ -226,15 +236,26 @@ form input:focus {
     color: #fff;
     font-weight: bolder;
     cursor: pointer;
+    padding: 8px;
+    font-size: 20px;
 }
 
 .addbutton:hover, .removebutton:hover {
     color: #FF69B4;
 }
 
-.artist {
+.artist, .album {
     font-weight: normal;
     margin-top: 5px;
+}
+
+.album {
+    color: #FF69B4;
+}
+
+.song {
+    margin-right: 4px;
+    font-size: 15px;
 }
 
 .playlistname {
