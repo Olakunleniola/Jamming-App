@@ -1,3 +1,4 @@
+
 import React from "react";
 import {useState, useEffect} from "react";
 import '../jamming.css';
@@ -10,51 +11,61 @@ import {
   fetchProfile, 
   getSongs, 
   getRefreshToken,
-  redirectToAuthCodeFlow,
   createPLaylist,
-  addTracksToSpotifyPlaylist
+  addTracksToSpotifyPlaylist,
+  getUserAccessToken,
 } from "../api/api"
+import { userdata } from "../data/mock_data";
 
-
-const token = "BQAGuF3VEaLeO-XGCo63F6uaOUQIowEkt0u9FyQvV13_C3GEFSH1imerIzYFadv-BWLuQy-Gn3j81RotPScVQc-6DB1S49qzO9ryvc31k82qVssuqhWTFF0RQ0PfFCbGIsmZ61Qprp-5w-suXSyFAOWtsAj4vyeTdSXgUuhVojGIYyGTljQW8ZPmDPPjXSQMnyoMm3YTOwRWpE1RFkeVuJ7p8VufAKqPpHYHDvz1nO-2SHOPE9Mkd28n_SV1ktuDZVazL4Vg5I0oe0mc"
-
-const refreshToken = "AQBiwxESHVi5anRwlzOI9vblpb5JLkGo6oUOJl_pRd86rEGAg0AxpjOUYzCFsCMr279obTkXOhplPPDSLxxLVj46e-ub0fR6Rvt2NAqz8xPHd6M-uHNRojgcvuZeICsGZfo"
+const mytoken = "BQDbFAExxh7hZC28KN82w4UzVUiYuo_MYN0wpGPcuTqHe5d3cm326XHLzlmeLEeTHo_FkYJuKtp5lvPZqg_2CxAkxB-tqYc-LZE0OUEzZBRXXloXDmg"
+const usertoken = "BQBeEDte6u2irWOxLvJJwEPwUHd-n290raVyK-7D16tlJoLA-sxW3nnHNhG48XU3qGwNpOqJUe3hL1POxn64FvSRNsH9blPMKj9OatOpJh_pfge75M4lUix5RfjcWt7ZitLO3_qYxNohZ0BOcSMNLTGKuID_HyXDUohy26HW9TdNH7ChVg2hTq5zbGtv78MblkTasICSiN9jNSu8jgt3ZLYNZBOrcOSOGDEpWvfg-OvoK73E9j5Qe5PSclu9ZND4_PpEXYz8zz8BQi3d"
 
 function App() {  
-  const [code, setCode] = useState("");
-  const [accessToken, setAccessToken] = useState(""); 
-  const [authenticated, setAuthenticated] = useState(false);
-  const [userProfile, setUserProfile] = useState({});
+  const [code, setCode] = useState("")
+  const [accessToken, setAccessToken] = useState(mytoken); 
+  const [userAccessToken, setUserAccessToken ] = useState(usertoken);
+  const [authenticated, setAuthenticated] = useState(true);
+  const [userProfile, setUserProfile] = useState(userdata);
   const [query, setQuery] = useState("");
   const [trackData, setTrackData] = useState([]);
   const [playlist, setPlaylist] = useState([]);
-  const [message, setMessage] = useState({})
+  const [message, setMessage] = useState({});
 
   // Get user access token and profile data if authenticated
-  useEffect(() => {
-    async function getToken(){
-        const tokenData = await getAccessToken(code);
-        if(!tokenData){
-          setAuthenticated(false)
-          setMessage({msg: "Something Went Wrong... Try Logging in Again..", main:true, color:"red" })
-        }
-        const userData = await fetchProfile(accessToken);
-        if(!userData.hasOwnProperty("display_name")){
-          setAuthenticated(false)
-          setMessage({msg: "Something Went Wrong... Try Logging in Again..", main:true, color:"red" })
-        }
-        setAccessToken(tokenData);
-        setUserProfile(userData);
-        console.log(tokenData); // Use the token data as needed
-        console.log(userData); // Use the token data as needed
-    }
-    
-    if (authenticated) {
-      getToken();
-      return
-    }
+  // useEffect(() => {
+  //   async function getToken(){
 
-  }, [authenticated])
+  //     const userToken = await getUserAccessToken(code);
+  //     if(userToken.hasOwnProperty("error")){
+  //       setAuthenticated(false)
+  //       setMessage({msg: "Something Went Wrong... Try Logging in Again..", main:true, color:"red" })
+  //     }
+  //     setUserAccessToken(userToken)
+      
+  //     const tokenData = await getAccessToken()
+  //     if(!tokenData){
+  //       setAuthenticated(false)
+  //       setMessage({msg: "Something Went Wrong... Try Logging in Again..", main:true, color:"red" })
+  //     }
+  //     console.log(tokenData)
+  //     setAccessToken(tokenData);
+
+  //     const userData = await fetchProfile(userToken);
+  //     if(!userData.hasOwnProperty("display_name")){
+  //       setAuthenticated(false)
+  //       setMessage({msg: "Something Went Wrong... Try Logging in Again..", main:true, color:"red" })
+  //     }
+  //     setUserProfile(userData);
+  //     console.log(tokenData); // Use the token data as needed
+  //     console.log(userData); // Use the token data as needed
+  //   }
+    
+  //   if (authenticated) {
+  //     getToken();
+  //     return
+  //   }
+
+  // }, [authenticated, code])
 
   // on redirect from spotify check if a code is present in the url params
   // set authenticated if present
@@ -65,11 +76,14 @@ function App() {
       setCode(code);
       setAuthenticated(true);
       window.history.replaceState({}, document.title, window.location.pathname);
-    }else {
-      setAuthenticated(false);
+    }
+ 
+    else {
+      // setAuthenticated(false);
     }
   }, [])
 
+  
   const handleSearch = async(e) => {
     e.preventDefault();
     if(!query){
@@ -99,15 +113,18 @@ function App() {
     }
     
     // create a playlist on user spotify account 
-    const playlist_details = await createPLaylist(playlist_name, accessToken, userProfile.id)
-    let playlist_error =  handleError(playlist_details)
-    if(playlist_error && !playlist_details.hasOwnProperty("id")){return};
+    const playlist_details = await createPLaylist(playlist_name, userAccessToken, userProfile.id)
+    let playlist_error = await handleError(playlist_details)
+    if(playlist_error && !playlist_details.hasOwnProperty("id")){
+      setMessage({msg:"Something went Wrong", color:"red", show:true})
+      return
+    };
     
     // Save Selected songs to the created playlist 
     const {id} = playlist_details;
     const track_ur1s = playlist.map(itm => itm.uri);
-    const response = await addTracksToSpotifyPlaylist(id, track_ur1s, accessToken);
-    const addtrack_error = handleError(response);
+    const response = await addTracksToSpotifyPlaylist(id, track_ur1s, userAccessToken);
+    const addtrack_error = await handleError(response);
     if(addtrack_error && !response.hasOwnProperty("snapshot_id")){return};
     setMessage(
       {
@@ -191,14 +208,15 @@ function App() {
     }
     return false
   } 
-
-  if(message.hasOwnProperty("msg") && (message.show || message.main)){
-    {messengeLogger(message)}
-  }
- 
  
   return (
     <>  
+        {
+          message.hasOwnProperty("msg") && (message.show || message.main) && 
+          <>
+            {messengeLogger(message)}
+          </>
+        }
         <div id="loginError"></div>
         {!authenticated ? <LogIn /> : 
         (
