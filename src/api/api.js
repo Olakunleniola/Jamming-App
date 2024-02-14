@@ -148,6 +148,7 @@ export async function fetchProfile(token) {
     }
 }
 
+// Get user registration information
 export async function checkUserRegistered(username){
     const response = await fetch(`https://flask-jamming-app-email-api.onrender.com/spotify/user/${username}`);
     const data = await response.json();
@@ -157,6 +158,7 @@ export async function checkUserRegistered(username){
     return data;
 }   
 
+// make user registration request
 export async function requestToRegister(username, email) {
     const response = fetch("https://flask-jamming-app-email-api.onrender.com/spotify/mail", 
         {

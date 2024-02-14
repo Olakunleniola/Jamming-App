@@ -226,9 +226,6 @@ form input:focus {
     flex-direction: column;
 }
 
-ul:first-child() {
-    margin-top: 70px;
-}
 
 .res {
     display: flex;
