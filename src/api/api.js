@@ -2,6 +2,7 @@ const clientId = '605cdd5e4e4b4e7e814af71a371f3a7b';
 const clientSecret = '76c6ae3255604ecc9ac8bcd84f80fef7';
 const credentials = `${clientId}:${clientSecret}`;
 
+
 //  Get client access token 
 export async function getAccessToken() {
     const response = await fetch("https://accounts.spotify.com/api/token", {
@@ -12,8 +13,8 @@ export async function getAccessToken() {
         },
         body: 'grant_type=client_credentials'})
     
-    const {access_token, refresh_token} = await response.json()
-    localStorage.setItem('refresh_token', refresh_token);
+    const {access_token} = await response.json()
+    localStorage.setItem('qry_Tk', access_token);
     return access_token
 }
 
@@ -34,8 +35,10 @@ export async function getUserAccessToken(code) {
     });
 
     const result = await response.json();
-    const UserAccesstoken = result.access_token;
-    return UserAccesstoken;
+    const accessToken = result.access_token;
+    localStorage.setItem("refreshToken", result.refresh_token)
+    localStorage.setItem("acc_tk", accessToken)
+    return accessToken;
 }
 
 //  Redirect user to login to the spotify account
@@ -73,12 +76,13 @@ export async function getSongs(search, token) {
 export const getRefreshToken = async () => {
 
     // refresh token that has been previously stored
-    const refreshToken = localStorage.getItem('refresh_token');
+    const refreshToken = localStorage.getItem('refreshToken');
     const url = "https://accounts.spotify.com/api/token";
  
     const payload = {
        method: 'POST',
        headers: {
+        'Authorization': 'Basic ' + btoa(credentials),
          'Content-Type': 'application/x-www-form-urlencoded'
        },
        body: new URLSearchParams({
@@ -90,7 +94,7 @@ export const getRefreshToken = async () => {
 
     const body = await fetch(url, payload);
     const response = await body.json();
-    localStorage.setItem('refresh_token', response.refreshToken);
+    localStorage.setItem('refreshToken', response.refreshToken);
     return response.accessToken;
 }
 
@@ -130,24 +134,35 @@ export const addTracksToSpotifyPlaylist = async (playlist_id, uris, token) => {
 
 // Get User Profile Infomation from spotify
 export async function fetchProfile(token) {
-    const result = await fetch("https://api.spotify.com/v1/me", {
+    const response = await fetch("https://api.spotify.com/v1/me", {
         method: "GET", headers: { Authorization: `Bearer ${token}` }
     });
 
-    return await result.json();
+    
+    if (response.ok) {
+        const data = await response.json()
+        localStorage.setItem("usr_dt", JSON.stringify(data))
+        return data
+    }else {
+        return response.json()
+    }
 }
 
 export async function checkUserRegistered(username){
-    const response = await fetch(`https://flask-jamming-app-email-api.onrender.com/spotify/user/${username}`)
-    return await response.json()
-}
+    const response = await fetch(`https://flask-jamming-app-email-api.onrender.com/spotify/user/${username}`);
+    const data = await response.json();
+    if (data.registered){
+        localStorage.setItem("reg", true);
+    }
+    return data;
+}   
 
 export async function requestToRegister(username, email) {
     const response = fetch("https://flask-jamming-app-email-api.onrender.com/spotify/mail", 
         {
             method: "POST",
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify({
                 name:username,
@@ -155,7 +170,7 @@ export async function requestToRegister(username, email) {
             }),
         }
     )
-    return await response.json()
+    return await response
 }
 
 // Helper Functions from Spotify documentation https://developer.spotify.com/documentation/web-api/howtos/web-app-profile
