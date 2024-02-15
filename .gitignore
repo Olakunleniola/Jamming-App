@@ -25,3 +25,5 @@ yarn-error.log*
 /src/index.css
 src/logo.svg
 src/data/*
+/.gitignore
+/.env

@@ -1,7 +1,5 @@
-const clientId = '605cdd5e4e4b4e7e814af71a371f3a7b';
-const clientSecret = '76c6ae3255604ecc9ac8bcd84f80fef7';
-const credentials = `${clientId}:${clientSecret}`;
-
+const clientId = process.env.REACT_APP_CLIENT_ID;
+const credentials = process.env.REACT_APP_CREDENTIALS;
 
 //  Get client access token 
 export async function getAccessToken() {
