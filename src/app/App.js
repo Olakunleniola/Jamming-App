@@ -44,6 +44,7 @@ function App() {
         handleError(userToken)
         if(!userToken){
           setAuthenticated(false)
+          localStorage.clear()
           setMessage({msg: "Something Went Wrong... Try Logging in Again..", main:true, color:"red" })
         }
         setAccessToken(userToken)
@@ -54,10 +55,11 @@ function App() {
       // Check if query token exist in the localStorage
       // Make an API request if not exist else dont  
       const qry_token = localStorage.getItem("qry_Tk")
-      if (!qry_token){
+      if (!qry_token ){
         const tkn = await getAccessToken()
         if(!tkn){
           setAuthenticated(false)
+          localStorage.clear()
           setMessage({msg: "Something Went Wrong... Try Logging in Again..", main:true, color:"red" })
         }
         setQueryToken(tkn)
