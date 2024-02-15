@@ -2,6 +2,10 @@ const clientId = process.env.REACT_APP_CLIENT_ID;
 const credentials = process.env.REACT_APP_CREDENTIALS;
 const url = process.env.REACT_APP_URL
 
+console.log(clientId)
+console.log(credentials)
+console.log(url)
+
 //  Get client access token 
 export async function getAccessToken() {
     const response = await fetch("https://accounts.spotify.com/api/token", {
