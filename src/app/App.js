@@ -1,4 +1,3 @@
-
 import React from "react";
 import {useState, useEffect} from "react";
 import '../jamming.css';
@@ -82,8 +81,9 @@ function App() {
       
       // Check if customer is registered to use app 
       const reg = localStorage.getItem("reg")
+      const user_dta = await JSON.parse(localStorage.getItem("usr_dt"))
       if(!reg){
-        const check_user = await checkUserRegistered(usr_dt.display_name)
+        const check_user = await checkUserRegistered(user_dta.email)
         if(check_user.hasOwnProperty("name")){
           if(check_user.pending && !check_user.registered) {
             setRegisterPending(true)
@@ -260,7 +260,7 @@ function App() {
         const token = await getRefreshToken()
         const qrytk = await getAccessToken()
         // if no token set redirect user to login again to their account
-        if(!token && !qrytk) {
+        if(!token || !qrytk) {
           setMessage({msg:"Sorry!!!, Your Login Session have Expired.. Please login Again...", color:"red", main:true})
           setAuthenticated(false)
           localStorage.clear()

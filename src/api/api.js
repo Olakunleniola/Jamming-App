@@ -138,19 +138,18 @@ export async function fetchProfile(token) {
         method: "GET", headers: { Authorization: `Bearer ${token}` }
     });
 
-    
     if (response.ok) {
         const data = await response.json()
         localStorage.setItem("usr_dt", JSON.stringify(data))
         return data
     }else {
-        return response.json()
+        return response
     }
 }
 
 // Get user registration information
-export async function checkUserRegistered(username){
-    const response = await fetch(`https://flask-jamming-app-email-api.onrender.com/spotify/user/${username}`);
+export async function checkUserRegistered(email){
+    const response = await fetch(`https://flask-jamming-app-email-api.onrender.com/spotify/user/${email}`);
     const data = await response.json();
     if (data.registered){
         localStorage.setItem("reg", true);
