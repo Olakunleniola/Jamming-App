@@ -81,7 +81,7 @@ function App() {
       
       // Check if customer is registered to use app 
       const reg = localStorage.getItem("reg")
-      const user_dta = await JSON.parse(localStorage.getItem("usr_dt"))
+      const user_dta = await JSON.parse(localStorage.getItem("usr_dt")) || {}
       if(!reg){
         const check_user = await checkUserRegistered(user_dta.email)
         if(check_user.hasOwnProperty("name")){
