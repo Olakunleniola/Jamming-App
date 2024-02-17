@@ -28,7 +28,7 @@ function App() {
   const [trackData, setTrackData] = useState([]);
   const [playlist, setPlaylist] = useState([]);
   const [message, setMessage] = useState({});
-  const [registered, setRegistered] = useState(false);
+  const [registered, setRegistered] = useState(true);
   const [registerPending, setRegisterPending] = useState(false);
 
 
@@ -282,6 +282,11 @@ function App() {
     }
     return false // return false if no error
   } 
+
+  const handleLogout = () => {
+    localStorage.clear();
+    setAuthenticated(false);
+  }
  
   return (
     <>  
@@ -330,6 +335,7 @@ function App() {
                     playlist={playlist}
                     removeSongFromPlaylist={removeSongFromPlaylist}
                     savePlaylistToSpotify={savePlaylistToSpotify}
+                    logout={handleLogout}
                   />) 
                   :
                   (<Register registerRequest={registerRequest} />)

@@ -3,7 +3,7 @@ import { Search } from "./Search";
 import { AddPlaylist } from "./AddPlaylist";
 import { SearchResult } from "./SearchResult";
 
-export function UserAllowed ({query,setQuery,handleSearch, trackData, addToPlaylist, playlist, removeSongFromPlaylist, savePlaylistToSpotify}){
+export function UserAllowed ({query,setQuery,handleSearch, trackData, addToPlaylist, playlist, removeSongFromPlaylist, savePlaylistToSpotify, logout}){
     return (
         <>
             <Search 
@@ -32,6 +32,7 @@ export function UserAllowed ({query,setQuery,handleSearch, trackData, addToPlayl
                     </>
                 }   
             </div>
+            <button id="logout-but" onClick={logout}>logout</button>
         </>
     )
 }

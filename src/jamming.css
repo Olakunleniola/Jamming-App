@@ -42,7 +42,7 @@ body {
     line-height: 30px;
 }
 
-#login-but {
+#login-but, #logout-but {
     padding: 20px;
     background:url(https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Spotify_App_Logo.svg/400px-Spotify_App_Logo.svg.png);
     background-size: 30px;
