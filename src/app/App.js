@@ -301,7 +301,7 @@ function App() {
         (
           <>
             <header>
-                  <h1>Ja<span>mm</span>ing</h1>
+                  <h1 className="jam">Ja<span className="min">mm</span>ing</h1>
             </header>
             <main id="main-container">
             {userProfile.hasOwnProperty("email") &&
