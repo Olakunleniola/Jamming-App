@@ -319,9 +319,8 @@ function App() {
                 (
                   <div className="register">
                       <p>
-                        Your registration request is being processed <br/>  
-                        You will be notified via email when completed<br/>
-                        Please check back later<br/> <span> Thank you </span> 
+                        Your registration request is being processed.<br/>    
+                        You will be notified via email when it's completed. Please check back later.<br/> <span> Thank you </span> 
                       </p>
                   </div>
                 ):
