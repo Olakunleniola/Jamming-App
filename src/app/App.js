@@ -175,7 +175,7 @@ function App() {
     if(addtrack_error && !response.hasOwnProperty("snapshot_id")){return};
     setMessage(
       {
-        msg:`Success, All selected tracks/songs have been added to your newly created ${playlist_name} playlist and saved to your spotify account... Listen on Spotify.. Enjoy!!!!`, 
+        msg:`Congratulations! All selected tracks have been successfully added to your newly created playlist, "${playlist_name}", and seamlessly saved to your Spotify account. Sit back, relax, and enjoy your personalized music collection on Spotify. Happy listening!`, 
         color:"green", 
         show:true,
       }
